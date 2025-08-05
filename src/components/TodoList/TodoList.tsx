@@ -5,11 +5,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { setTodo } from '../../features/currentTodo';
 
-type Props = {
-  isError: boolean;
-};
-
-export const TodoList: React.FC<Props> = ({ isError }) => {
+export const TodoList: React.FC = () => {
   const todos = useAppSelector(state => state.todos);
   const dispatch = useDispatch();
   const { query, status } = useAppSelector(state => state.filter);
@@ -26,7 +22,7 @@ export const TodoList: React.FC<Props> = ({ isError }) => {
 
   return (
     <>
-      {isError && (
+      {filteredTodos.length === 0 && (
         <p className="notification is-warning">
           There are no todos matching current filter criteria
         </p>

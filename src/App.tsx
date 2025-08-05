@@ -9,7 +9,6 @@ import { useAppSelector } from './app/hooks';
 
 export const App = () => {
   const [isLoading, setIsloading] = useState(false);
-  const [isError, setIsError] = useState(false);
   const currentTodo = useAppSelector(state => state.currentTodo);
   const dispatch = useDispatch();
 
@@ -20,9 +19,7 @@ export const App = () => {
       .then(todosFromServer => {
         dispatch(setTodos(todosFromServer));
       })
-      .catch(() => {
-        setIsError(true);
-      })
+      .catch(() => {})
       .finally(() => {
         setIsloading(false);
       });
@@ -41,7 +38,7 @@ export const App = () => {
 
             <div className="block">
               {isLoading && <Loader />}
-              {!isLoading && <TodoList isError={isError} />}
+              {!isLoading && <TodoList />}
             </div>
           </div>
         </div>
